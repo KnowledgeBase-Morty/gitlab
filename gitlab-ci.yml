@@ -1,0 +1,27 @@
+default:
+  image: ctm-docker.art.sdl.usu.edu/wosa/nca/nca-develop:1.3
+
+### Don't forgot to set the DOCKER_AUTH_CONFIG (In Gitlab - See README.md) in order to access the release image from the artifactory.
+# `DOCKER_AUTH_CONFIG`={
+#     "auths": {
+#         "https://ctm-docker.art.sdl.usu.edu": {
+#             "auth": "(`echo -n<username>:<password> | base64`)",
+#             "email": "`<insert-email>`"
+#         }
+#     }
+# }
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+build:
+  stage: build
+  script:
+    - cd ./release
+    - chmod +x buildRelease.bash
+    - ./buildRelease.bash
+
+test:
+  stage: test
+  script:
+    - docker run nca_release:1.3 ./WosaTester
