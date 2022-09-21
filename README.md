@@ -10,7 +10,7 @@ docker-compose.yaml:
 3. RUN: `docker compose up -d`
 
 In docker container:
-1. Make sure the `external_url` is set to `http://gitlab.example.com` (`vi /etc/gitlab/gitlab.rb`). Run `gitlab-ctl reconfigure` if a change was made. Try loggin in (username: `root`, password: `/etc/gitlab/initial_root_password`) from local browser at `http://gitlab.example.com`. If it does not work, please see the `Loggin In` section.
+1. Make sure the `external_url` is set to `http://gitlab.example.com` (`vi /etc/gitlab/gitlab.rb`). Run `gitlab-ctl reconfigure` if a change was made. Try loggin in (username: `root`, password: `/etc/gitlab/initial_root_password`) from local browser at `http://gitlab.example.com`. If it does not work, try `http://localhost`. If that doesn't work either, please see the `Loggin In` section.
 2. Create/Import a repository (on the UI).
 3. Add a `.gitlab-ci.yml` file to the root directory of the repository (See `https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html`)
 4. Create a `gitlab-runner` (Follow instructions at `http://gitlab.example.com/root/<repo-name>/-/settings/ci_cd#js-runners-settings`). Make sure to select `docker` and once a runner is registered, edit the config file (`vi /etc/gitlab-runner/config.toml`) and add `network_mode = "gitlab_default"` below `shm_size = 0`.
